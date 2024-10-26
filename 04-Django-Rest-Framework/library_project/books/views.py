@@ -11,7 +11,12 @@ class BookListAPIView(generics.ListAPIView):
     queryset = Book.objects.all()
     serializer_class = BookSerializer
 
+class BookDetailAPIView(generics.RetrieveAPIView):
+    queryset = Book.objects.all()
+    serializer_class = BookSerializer
 
+
+# function based view in DRF
 @api_view(['GET'])
 def book_list_view(request, *args, **kwargs):
     books = Book.objects.all()
