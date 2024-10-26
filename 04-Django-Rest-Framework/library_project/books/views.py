@@ -23,6 +23,9 @@ class BookUpdateAPIView(generics.UpdateAPIView):
     queryset = Book.objects.all()
     serializer_class = BookSerializer
 
+class BookCreateAPIView(generics.CreateAPIView):
+    queryset = Book.objects.all()
+    serializer_class = BookSerializer
 
 # function based view in DRF
 @api_view(['GET'])
