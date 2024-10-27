@@ -7,7 +7,8 @@ from yaml import serialize
 
 from .models import Book
 from .serializers import BookSerializer
-from rest_framework import generics
+from rest_framework import generics, status
+
 
 # Create your views here.
 
@@ -26,9 +27,31 @@ class BookListAPIView(APIView):
         }
         return Response(data)
 
-class BookDetailAPIView(generics.RetrieveAPIView):
-    queryset = Book.objects.all()
-    serializer_class = BookSerializer
+# class BookDetailAPIView(generics.RetrieveAPIView):
+#     queryset = Book.objects.all()
+#     serializer_class = BookSerializer
+
+class BookDetailAPIView(APIView):
+
+    def get(self, request, pk):
+        try:
+            book = Book.objects.get(id=pk)
+            serializer_data = BookSerializer(book).data
+
+            data = {
+                "status": "Successfull",
+                "book": serializer_data,
+            }
+
+            return Response(data, status=status.HTTP_200_OK)
+        except Exception:
+            return Response(
+                {
+                    "status": "Does not exists",
+                    "message": "Book is not found"
+                },
+                status=status.HTTP_404_NOT_FOUND
+            )
 
 class BookDeleteAPIView(generics.DestroyAPIView):
     queryset = Book.objects.all()
