@@ -70,13 +70,21 @@ class BookCreateAPIView(APIView):
     def post(self, request):
         data = request.data
         serializer = BookSerializer(data=data)
-        if serializer.is_valid():
+        if serializer.is_valid(raise_exception=True):
             books = serializer.save()
             data = {
                 "status": "Books are saved to the database",
                 "books": data
             }
             return Response(data)
+        # else:
+        #     return Response(
+        #         {
+        #             "status": False,
+        #             "message": "Serializer is not valid"
+        #         },
+        #         status=status.HTTP_400_BAD_REQUEST
+        #     )
 
 class BookListCreateAPIView(generics.ListCreateAPIView):
     queryset = Book.objects.all()
