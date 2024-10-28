@@ -80,8 +80,18 @@ class BookDeleteAPIView(APIView):
 
 class BookUpdateAPIView(APIView):
     def put(self, request, pk):
+        global book_saved
         book = get_object_or_404(Book.objects.all(), id=pk)
-        print(book)
+        data = request.data
+        serializer = BookSerializer(instance=book, data=data, partial=True)
+        if serializer.is_valid(raise_exception=True):
+            book_saved = serializer.save()
+        return Response(
+            {
+                "status": True,
+                "message": f"Book {book_saved} updated successfully",
+            }
+        )
 
 # class BookCreateAPIView(generics.CreateAPIView):
 #     queryset = Book.objects.all()
