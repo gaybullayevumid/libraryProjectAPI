@@ -1,0 +1,31 @@
+VIEWS -> Function views and Class-Based View
+
+Class-based views:
+1) Concreate Views
+CreateAPIView - POST,
+ListAPIView - GET,
+RetrieveAPIVIew - GET,
+UpdateAPIView - PUT,
+DestroyAPIView - DELETE
+
+2) GENERIC VIEW ->
+ListCreateAPIView - GET, POST
+RetrieveUpdateAPIView - GET, PUT
+RetrieveDestroyAPIView - GET, DELETE
+RetrieveUpdateDestroyAPIView - GET, PUT, DELETE
+
+
+3) APIVIEW <- VIEW
+GET, PUT, PATCH, CREATE, UPDATE, DELETE
+
+4) VIEWSET -> MODELVIEWSET -> GET, PUT, PATCH, CREATE, UPDATE, DELETE
+
+
+DRF authenticaton
+
+authentication - process -> login, logout and register
+
+authentication:
+1) basic authentication -> username and password -> access -> base64 ga o'tkazilib bazadan tekshiriladi. Production uchun taqiqlangan
+2) session authentication -> 1) username and password -> baza -> sessionID -> user 2) sessionID -> request. if logout, sessionID - o'chiriladi.
+3) token authentication
