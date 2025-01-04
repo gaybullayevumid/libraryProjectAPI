@@ -13,9 +13,9 @@ from rest_framework import generics, status
 
 # Create your views here.
 
-# class BookListAPIView(generics.ListAPIView):
-#     queryset = Book.objects.all()
-#     serializer_class = BookSerializer
+class BookListAPIView(generics.ListAPIView):
+    queryset = Book.objects.all()
+    serializer_class = BookSerializer
 
 class BookListAPIView(APIView):
     def get(self, request):
